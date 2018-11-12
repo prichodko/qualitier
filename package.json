@@ -16,6 +16,8 @@
   },
   "homepage": "https://github.com/prichodko/qualitier#readme",
   "dependencies": {
-    "esm": "^3.0.84"
+    "esm": "^3.0.84",
+    "please-upgrade-node": "^3.1.1",
+    "update-notifier": "^2.5.0"
   }
 }
