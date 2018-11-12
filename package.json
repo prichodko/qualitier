@@ -1,6 +1,6 @@
 {
   "name": "qualitier",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Audit project standards.",
   "bin": "bin/cli.js",
   "main": "index.js",
