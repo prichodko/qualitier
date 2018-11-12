@@ -48,7 +48,7 @@ const configs = [
   }
 ]
 
-const qualitier = ({ dir = process.cwd() }) => {
+const qualitier = ({ dir = process.cwd(), flags }) => {
   const audit = configs.reduce(
     (acc, { name, explorer, defaultConfig }) => {
       const result = explorer.searchSync(dir)
@@ -81,7 +81,9 @@ const qualitier = ({ dir = process.cwd() }) => {
   console.log(chalk.yellow("Warning - found, but differs from recommended"))
   audit.warning.forEach(config => {
     console.log(warning, `${chalk.yellow(config.name)}`)
-    // console.log(config.diff)
+    if (flags.diff) {
+      console.log(config.diff)
+    }
   })
 
   console.log()
