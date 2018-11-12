@@ -1,0 +1,21 @@
+{
+  "name": "qualitier",
+  "version": "0.0.0",
+  "description": "Audit project standards.",
+  "bin": "bin/cli.js",
+  "main": "index.js",
+  "module": "src/qualitier.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": "prichodko/qualitier",
+  "author": "Pavel Prichodko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prichodko/qualitier/issues"
+  },
+  "homepage": "https://github.com/prichodko/qualitier#readme",
+  "dependencies": {
+    "esm": "^3.0.84"
+  }
+}
