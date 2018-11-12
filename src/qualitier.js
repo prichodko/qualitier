@@ -1,51 +1,51 @@
-import cosmiconfig from "cosmiconfig"
-import path from "path"
+import cosmiconfig from 'cosmiconfig'
+import path from 'path'
 
-import chalk from "chalk"
-import { success, warning, error } from "log-symbols"
-import diff from "jest-diff"
-import { NO_DIFF_MESSAGE } from "jest-diff/build/constants"
+import chalk from 'chalk'
+import { success, warning, error } from 'log-symbols'
+import diff from 'jest-diff'
+import { NO_DIFF_MESSAGE } from 'jest-diff/build/constants'
 
-const eslint = cosmiconfig("eslint", { packageProp: "eslintConfig" })
-const prettier = cosmiconfig("prettier")
-const lintStaged = cosmiconfig("lint-staged")
-const husky = cosmiconfig("husky")
-const commitlint = cosmiconfig("commitlint")
-const stylelint = cosmiconfig("stylelint")
+const eslint = cosmiconfig('eslint', { packageProp: 'eslintConfig' })
+const prettier = cosmiconfig('prettier')
+const lintStaged = cosmiconfig('lint-staged')
+const husky = cosmiconfig('husky')
+const commitlint = cosmiconfig('commitlint')
+const stylelint = cosmiconfig('stylelint')
 
-const getConfig = p => require(path.resolve(__dirname, "..", p))
+const getConfig = p => require(path.resolve(__dirname, '..', p))
 
 const configs = [
   {
-    name: "ESLint",
+    name: 'ESLint',
     explorer: eslint,
-    defaultConfig: {}
+    defaultConfig: {},
   },
   {
-    name: "Prettier",
+    name: 'Prettier',
     explorer: prettier,
-    defaultConfig: getConfig(".prettierrc.js")
+    defaultConfig: getConfig('.prettierrc.js'),
   },
   {
-    name: "lint-staged",
+    name: 'lint-staged',
     explorer: lintStaged,
-    defaultConfig: getConfig(".lintstagedrc.js")
+    defaultConfig: getConfig('.lintstagedrc.js'),
   },
   {
-    name: "commitlint",
+    name: 'commitlint',
     explorer: commitlint,
-    defaultConfig: getConfig(".commitlintrc.js")
+    defaultConfig: getConfig('.commitlintrc.js'),
   },
   {
-    name: "husky",
+    name: 'husky',
     explorer: husky,
-    defaultConfig: getConfig(".huskyrc.js")
+    defaultConfig: getConfig('.huskyrc.js'),
   },
   {
-    name: "stylelint",
+    name: 'stylelint',
     explorer: stylelint,
-    defaultConfig: getConfig(".stylelintrc.js")
-  }
+    defaultConfig: getConfig('.stylelintrc.js'),
+  },
 ]
 
 const qualitier = ({ dir = process.cwd(), flags }) => {
@@ -72,13 +72,13 @@ const qualitier = ({ dir = process.cwd(), flags }) => {
   )
 
   console.log()
-  console.log(chalk.green("Success"))
+  console.log(chalk.green('Success'))
   audit.success.forEach(config => {
     console.log(success, chalk.green(config.name))
   })
 
   console.log()
-  console.log(chalk.yellow("Warning - found, but differs from recommended"))
+  console.log(chalk.yellow('Warning - found, but differs from recommended'))
   audit.warning.forEach(config => {
     console.log(warning, `${chalk.yellow(config.name)}`)
     if (flags.diff) {
@@ -87,7 +87,7 @@ const qualitier = ({ dir = process.cwd(), flags }) => {
   })
 
   console.log()
-  console.log(chalk.red("Error - not found"))
+  console.log(chalk.red('Error - not found'))
   audit.error.forEach(config => {
     console.log(error, `${chalk.red(config.name)}`)
   })
