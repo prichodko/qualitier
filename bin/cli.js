@@ -9,6 +9,7 @@ const { audit, fix } = require('../')
 const pkg = require('../package')
 
 updateNotifier({ pkg }).notify()
+require('please-upgrade-node')(pkg)
 
 const cli = sade('qualitier')
 
