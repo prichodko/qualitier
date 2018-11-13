@@ -48,7 +48,7 @@ const configs = [
   },
 ]
 
-const qualitier = ({ dir = process.cwd(), flags }) => {
+export const audit = (dir = process.cwd(), flags) => {
   const audit = configs.reduce(
     (acc, { name, explorer, defaultConfig }) => {
       const result = explorer.searchSync(dir)
@@ -92,5 +92,3 @@ const qualitier = ({ dir = process.cwd(), flags }) => {
     console.log(error, `${chalk.red(config.name)}`)
   })
 }
-
-export { qualitier }

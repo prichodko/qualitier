@@ -1,41 +1,31 @@
 #!/usr/bin/env node
 
-"use strict"
+'use strict'
 
-const meow = require("meow")
-const chalk = require("chalk").default
-const updateNotifier = require("update-notifier")
+const sade = require('sade')
+const updateNotifier = require('update-notifier')
 
-const { qualitier } = require("../")
-const pkg = require("../package")
+const { audit, fix } = require('../')
+const pkg = require('../package')
 
 updateNotifier({ pkg }).notify()
 
-const { input, flags } = meow(
-  `
-    Usage
-      $ qualitier ${chalk.dim("<project-directory> [options]")}
- 
-    Options
-      --diff, -d  Show configs diff object 
- 
-    Examples
-      $ qualitier --diff
-`,
-  {
-    flags: {
-      diff: {
-        type: "boolean",
-        alias: "d"
-      },
-      version: {
-        alias: "v"
-      },
-      help: {
-        alias: "h"
-      }
-    }
-  }
-)
+const cli = sade('qualitier')
 
-qualitier({ dir: input[0], flags })
+cli
+  .version(pkg.version)
+  .option('--web, -w', 'Audit project as a web app', false)
+  .option('--node, -n', 'Audit project as a node app', false)
+  .option('--diff, -d', 'Show diff between theirs and ours config object')
+  .example('--diff --web')
+  .example('--node')
+
+cli
+  .command('audit [dir]', 'Audit project standards (default)', {
+    default: true,
+  })
+  .action(audit)
+
+cli.command('fix [dir]', 'Fix or add config files').action(fix)
+
+cli.parse(process.argv)
